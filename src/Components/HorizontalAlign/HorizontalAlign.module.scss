@@ -2,8 +2,8 @@
     margin: 25px 0px;
     padding: 0vw 10vw;
     width: 80vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));    
+    grid-gap: 5px;
+    
 }

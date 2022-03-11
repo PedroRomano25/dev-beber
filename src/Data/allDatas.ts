@@ -145,7 +145,7 @@ export const CardDrinkOptionsFilter = {
 
 export const styleCard = {minWidth: "190px", maxWidth: "250px", height: "350px"}
 
-export const syleInput = { width: "15vw", backgroundColor: "var(--nav-bg)" }
+export const syleInput = { width: "1fr", backgroundColor: "var(--nav-bg)" }
 
 export const dataMenu = [
   {
