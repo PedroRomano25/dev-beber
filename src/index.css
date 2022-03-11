@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Gochi+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Just+Another+Hand&display=swap');
 
 :root {
   /* colors */
   --nav-bg: #FAF9F6;
   --yellow:#FAD21E;
   --grey:#353839;    
-  --fredoka:'Fredoka', sans-serif;   
+  --fredoka:'Fredoka', sans-serif;  
+  --hand-font:'Gochi Hand', sans-serif; 
+
 }
 
 * { 

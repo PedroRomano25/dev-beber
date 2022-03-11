@@ -9,6 +9,7 @@ import {
   CardDrinkOptionsDefault,
   CardDrinkOptionsFilter,
   CardDrinkOptionsSemResultado,
+  syleInput,
 } from "../../Data/allDatas";
 import { axiosAppServer } from "../../Service/axiosAppServer";
 import {
@@ -57,6 +58,7 @@ const PaginaInicial = () => {
     return dados;
   },[SearchWord]) 
 
+
   useEffect(() => {
     setDrinksShow(contexto.FirstLetter);
   }, []);
@@ -93,9 +95,9 @@ const PaginaInicial = () => {
       );
   }, [DrinksShow, Filters]);
 
-  const SearchDrink =  (palavra: string) => {
+  const SearchDrink = useCallback( (palavra: string) => {
     setSearchWord(palavra);
-  }
+  },[])
 
   return (
     <>
@@ -103,7 +105,7 @@ const PaginaInicial = () => {
         <TextField
           size="small"
           onChange={(x) => SearchDrink(x.target.value)}
-          sx={{ width: "15vw", backgroundColor: "var(--nav-bg)" }}
+          sx={syleInput}
           label="Pesquise"
         />
         <Autocomplete
@@ -115,7 +117,7 @@ const PaginaInicial = () => {
             });
           }}
           options={ConvertToOptionsIngredients(contexto.Ingredients)}
-          sx={{ width: "15vw", backgroundColor: "var(--nav-bg)" }}
+          sx={syleInput}
           renderInput={(params) => (
             <TextField {...params} label="Ingrediente" />
           )}
@@ -129,7 +131,7 @@ const PaginaInicial = () => {
             });
           }}
           options={ConvertToOptionsGlass(contexto.Glass)}
-          sx={{ width: "15vw", backgroundColor: "var(--nav-bg)" }}
+          sx={syleInput}
           renderInput={(params) => (
             <TextField {...params} label="Tipo de Copo" />
           )}
@@ -143,7 +145,7 @@ const PaginaInicial = () => {
             });
           }}
           options={ConvertToOptionsCategory(contexto.Category)}
-          sx={{ width: "15vw", backgroundColor: "var(--nav-bg)" }}
+          sx={syleInput}
           renderInput={(params) => <TextField {...params} label="Categoria" />}
         />
         <Autocomplete
@@ -155,7 +157,7 @@ const PaginaInicial = () => {
             });
           }}
           options={ConvertToOptionsAlcoholic(contexto.Alcoholic)}
-          sx={{ width: "15vw", backgroundColor: "var(--nav-bg)" }}
+          sx={syleInput}
           renderInput={(params) => (
             <TextField {...params} label="Categoria de Alcool" />
           )}

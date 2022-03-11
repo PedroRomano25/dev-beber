@@ -2,10 +2,9 @@ import React from 'react';
 import './App.css';
 import Menu from './Components/Menu/Menu';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Teste from './Pages/Teste';
 import PaginaInicial from './Pages/PaginaInicial/PaginaInicial';
-import CardDrink from './Components/Card/Card';
 import { dataMenu } from './Data/allDatas';
+import RandomDrink from './Pages/Random/Random';
 
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
         <Menu value={dataMenu} />
         <Routes>
           <Route path="/" element={<PaginaInicial />} />
-          <Route path="/teste" element={<Teste />} />
+          <Route path="/RandomDrink" element={<RandomDrink />} />
         </Routes>
       </BrowserRouter>,
     </>

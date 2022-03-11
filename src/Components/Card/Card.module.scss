@@ -1,0 +1,12 @@
+.flipCardContent {
+    padding: 5px;
+    display: grid;    
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    grid-template-columns: auto auto;  
+    grid-gap: 5px; 
+    font-family: var(--hand-font);
+    font-size: 0.75rem;
+  }
+  

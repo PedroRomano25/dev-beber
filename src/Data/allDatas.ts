@@ -21,7 +21,7 @@ export const ApiDrinksDefault: ApiDrinks = {
       strInstructionsDE: "Carregando",
       strInstructionsFR: "Carregando",
       strInstructionsIT: "Carregando",
-      strDrinkThumb: "Carregando",
+      strDrinkThumb: "https://prints.ultracoloringpages.com/68fc26d3121e290a7403a60f776e229c.png",
       strIngredient1: "Carregando",
       strIngredient2: "Carregando",
       strIngredient3: "Carregando",
@@ -74,7 +74,7 @@ export const ApiDrinksDefault: ApiDrinks = {
       strInstructionsDE: "Carregando",
       strInstructionsFR: "Carregando",
       strInstructionsIT: "Carregando",
-      strDrinkThumb: "Carregando",
+      strDrinkThumb: "https://prints.ultracoloringpages.com/68fc26d3121e290a7403a60f776e229c.png",
       strIngredient1: "Carregando",
       strIngredient2: "Carregando",
       strIngredient3: "Carregando",
@@ -117,7 +117,7 @@ export const CardDrinkOptionsDefault = [
   {
     strDrink: "Carregando",
     strDrinkThumb:
-      "https://a-static.mlcdn.com.br/618x463/adesivo-parede-decorativo-loading-carregando-palavra-barra-aartedecor/aartedecor/1541-1863/bbc74def4e1116a12776398372101bcd.jpg",
+      "https://prints.ultracoloringpages.com/68fc26d3121e290a7403a60f776e229c.png",
     strCategory: "Carregando",
     strAlcoholic: "Carregando",
     strGlass: "Carregando",
@@ -143,6 +143,10 @@ export const CardDrinkOptionsFilter = {
   strGlass: null,
 };
 
+export const styleCard = {minWidth: "190px", maxWidth: "250px", height: "350px"}
+
+export const syleInput = { width: "15vw", backgroundColor: "var(--nav-bg)" }
+
 export const dataMenu = [
   {
     nome: "Home",
@@ -150,10 +154,6 @@ export const dataMenu = [
   },
   {
     nome: "Dica de Drink (Aleatório)",
-    link: "/",
-  },
-  {
-    nome: "Novo Teste",
-    link: "/",
+    link: "/RandomDrink",
   },
 ];
