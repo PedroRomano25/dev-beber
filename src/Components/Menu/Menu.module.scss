@@ -1,0 +1,33 @@
+nav {
+  background-color: var(--nav-bg);
+  width: 100vw;
+  border-bottom: var(--yellow) solid 3px;
+  border-top: #eeeeee solid 3px;
+
+  ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    margin-left: 10vw;
+    padding: 0px;
+  }
+ 
+
+  li {
+    margin: 0vw 2vw;
+    padding: 0.5em 0px;  
+    font: 1.2rem 900;
+    border-radius: 15%;
+    cursor: pointer;
+  }
+
+  li:first-child {
+    margin-left: 0px;
+  }
+
+  li:hover {
+    color: var(--yellow);
+  }
+}

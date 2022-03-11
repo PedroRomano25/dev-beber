@@ -1,0 +1,30 @@
+.container{
+    margin-top: 30px;
+
+    width: 80vw;
+    padding: 0px 10vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(42px,1fr));
+    
+    button{
+    border: var(--yellow) solid 2px;
+    padding: 10px;
+    border-radius: 100%;   
+    color: var(--grey);    
+    
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button::after{
+    display: block;
+}
+
+
+button:hover{
+    color: var(--yellow);
+}}

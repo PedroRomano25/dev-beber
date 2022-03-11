@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Menu from './Components/Menu/Menu';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Teste from './Pages/Teste';
+import PaginaInicial from './Pages/PaginaInicial/PaginaInicial';
+import CardDrink from './Components/Card/Card';
+import { dataMenu } from './Data/allDatas';
+
 
 function App() {
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Menu value={dataMenu} />
+        <Routes>
+          <Route path="/" element={<PaginaInicial />} />
+          <Route path="/teste" element={<Teste />} />
+        </Routes>
+      </BrowserRouter>,
+    </>
   );
 }
 
