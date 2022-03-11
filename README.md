@@ -1,43 +1,48 @@
-# Getting Started with Create React App
+# Dev-Beber
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://dev-beber.vercel.app/
 
-## Available Scripts
+Dev-Beber é uma aplicação front-end contruída com React JS.
 
-In the project directory, you can run:
+A Aplicação consiste em uma pesquisa de bebidas com diversos filtros, utilizando a base de dados  [The Cocktail DB](https://www.thecocktaildb.com/api.php).
 
-### `npm start`
+Projeto criado para treinar habilidades como contexto, uso de hooks, consumo de API, responsividade, filtros, e demais no React JS.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tecnologias Utilizadas
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- HTML
+- SASS
+- TypeScript
 
-### `npm test`
+## Bibliotecas Utilizadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Material-UI
+- react-card-flip
+- Axios
 
-### `npm run build`
+## Implantação em Produção
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Front-end web: [Vercel](https://dev-beber.vercel.app/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Como Executar o Projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- git clone https://github.com/PedroRomano25/dev-beber.git
+- cd dev-beber
+- npm i 
+- npm start
 
-### `npm run eject`
+## Funcionalidades
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Filtro por Nome,Ingrediente,Tipo de Copo, Categoria e Categoria de Alcool
+- Seleção por letra
+- Dica de Drink (Sugestão aleatória de um Drink)
+- Flip do Card ao Clicar
+- Responsividade
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Autor
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Pedro Romano | [Linkedin](https://www.linkedin.com/in/pedropauloromano/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
