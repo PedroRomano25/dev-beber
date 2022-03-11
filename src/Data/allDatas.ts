@@ -143,7 +143,7 @@ export const CardDrinkOptionsFilter = {
   strGlass: null,
 };
 
-export const styleCard = {minWidth: "190px", maxWidth: "250px", height: "350px"}
+export const styleCard = {minWidth: "190px", maxWidth: "450px", height: "350px"}
 
 export const syleInput = { width: "1fr", backgroundColor: "var(--nav-bg)" }
 

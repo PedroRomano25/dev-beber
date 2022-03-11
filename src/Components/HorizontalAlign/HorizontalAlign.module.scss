@@ -1,9 +1,12 @@
 .verticalContainer{
     margin: 25px 0px;
-    padding: 0vw 10vw;
+    padding-left: 10vw;
     width: 80vw;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));    
     grid-gap: 5px;
+    justify-content: center;
+   
     
+   
 }
