@@ -4,23 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApiCocktailProvider } from './Context/ApiCocktailDbContext';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Menu from './Components/Menu/Menu';
-import PaginaInicial from './Pages/PaginaInicial/PaginaInicial';
-import Teste from './Pages/Teste';
-import { dataMenu } from './Data/allDatas';
 
 
 ReactDOM.render( 
     <React.StrictMode>
-      <ApiCocktailProvider>  
-      <BrowserRouter>
-        <Menu value={dataMenu} />
-        <Routes>
-          <Route path="/" element={<PaginaInicial />} />
-          <Route path="/teste" element={<Teste />} />
-        </Routes>
-      </BrowserRouter>
+      <ApiCocktailProvider>
+      <App />
       </ApiCocktailProvider>
     </React.StrictMode>,
   document.getElementById('root')
