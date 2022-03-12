@@ -28,11 +28,13 @@ const PaginaInicial = () => {
   const [DrinksShow, setDrinksShow] = useState<CardDrinkOptions[]>([
     ...CardDrinkOptionsDefault,
   ]);
+  
   const [Filters, setFilters] = useState<CardDrinkOptions>(
     CardDrinkOptionsFilter
   );
-  const contexto = useApiCocktailContext();
 
+  const contexto = useApiCocktailContext();
+  
   const getDatabyLetterSelected = useCallback(async (letra: string) => {
     let dados = await axiosAppServer
       .get("/api/json/v1/1/search.php?f=" + letra)
@@ -60,7 +62,9 @@ const PaginaInicial = () => {
 
   useEffect(() => {
     setDrinksShow(contexto.FirstLetter);
-  }, []);
+  }, [contexto]);
+
+
 
   const dadoMemo = useMemo(() => {
     return DrinksShow.filter((i) =>
@@ -153,11 +157,9 @@ const PaginaInicial = () => {
           )}
         />
       </HorizontalAlign>
-
       <GridCardContainer>
         <CardDrink value={ConvertToDrinks(dadoMemo)} />
       </GridCardContainer>
-
       <SelectLetter
         data={GerarAlfabeto()}
         value={LetraSelecionada}
@@ -168,5 +170,4 @@ const PaginaInicial = () => {
     </>
   );
 };
-
 export default PaginaInicial;
