@@ -58,18 +58,10 @@ const PaginaInicial = () => {
     return dados;
   },[SearchWord]) 
 
-
   useEffect(() => {
     setDrinksShow(contexto.FirstLetter);
   }, []);
 
-  useEffect(() => {
-    getDatabyLetterSelected(LetraSelecionada);
-  }, [LetraSelecionada]);
-
-  useEffect(() => {
-    getDatabySearch(SearchWord);
-  }, [SearchWord]);
   const dadoMemo = useMemo(() => {
     return DrinksShow.filter((i) =>
       Filters.strGlass === undefined || Filters.strGlass === null
@@ -95,16 +87,14 @@ const PaginaInicial = () => {
       );
   }, [DrinksShow, Filters]);
 
-  const SearchDrink = useCallback( (palavra: string) => {
-    setSearchWord(palavra);
-  },[])
+
 
   return (
     <>
       <HorizontalAlign>
         <TextField
           size="small"
-          onChange={(x) => SearchDrink(x.target.value)}
+          onChange={(x) => getDatabySearch(x.target.value)}
           sx={syleInput}
           label="Pesquise"
         />
@@ -172,7 +162,7 @@ const PaginaInicial = () => {
         data={GerarAlfabeto()}
         value={LetraSelecionada}
         onClick={(e) => {
-          setLetraSelecionada(e);
+          getDatabyLetterSelected(e);
         }}
       />
     </>
