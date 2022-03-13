@@ -7,11 +7,9 @@ import SelectLetter from "../../Components/SelectLetter/SelectLetter";
 import { useApiCocktailContext } from "../../Context/ApiCocktailDbContext";
 import {
   CardDrinkOptionsDefault,
-  CardDrinkOptionsFilter,
-  CardDrinkOptionsSemResultado,
+  CardDrinkOptionsFilter,  
   syleInput,
 } from "../../Data/allDatas";
-import { axiosAppServer } from "../../Service/axiosAppServer";
 import {
   ConvertToDrinks,
   ConvertToOptionsAlcoholic,
@@ -20,85 +18,73 @@ import {
   ConvertToOptionsIngredients,
 } from "../../Service/convertToOptions";
 import { GerarAlfabeto } from "../../Service/gerarAlfabeto";
+import { useGetData } from "../../Service/getData";
 import { CardDrinkOptions } from "../../Types/allTypes";
 
-const PaginaInicial = () => {
-  const [LetraSelecionada, setLetraSelecionada] = useState<string>("A");
-  const [SearchWord, setSearchWord] = useState<string>("");
+const PaginaInicial = () => {  
   const [DrinksShow, setDrinksShow] = useState<CardDrinkOptions[]>([
     ...CardDrinkOptionsDefault,
   ]);
-  
+
   const [Filters, setFilters] = useState<CardDrinkOptions>(
     CardDrinkOptionsFilter
   );
+    const DrinkShowMemo = useMemo(() => ({
+      DrinksShow, setDrinksShow
+    }), [DrinksShow]);
 
+    const FiltersMemo = useMemo(() => ({
+      Filters, setFilters
+    }), [Filters]);
+
+    
+    
   const contexto = useApiCocktailContext();
-  
-  const getDatabyLetterSelected = useCallback(async (letra: string) => {
-    let dados = await axiosAppServer
-      .get("/api/json/v1/1/search.php?f=" + letra)
-      .then((i: any) => {
-        setDrinksShow(i.data.drinks);
-      })
-      .catch((i) => console.log("Falha ao coletar dados"));
-    return dados;
-  },[LetraSelecionada])
 
-  const getDatabySearch = useCallback(async (pesquisa: string) => {
-    let dados = await axiosAppServer
-      .get("/api/json/v1/1/search.php?s=" + pesquisa)
-      .then((i: any) => {
-        if (i.data.drinks != null) {
-          setDrinksShow(i.data.drinks);
-        }
-        if (i.data.drinks === null) {
-          setDrinksShow(CardDrinkOptionsSemResultado);
-        }
-      })
-      .catch((i) => console.log("Falha ao coletar dados" + i));
-    return dados;
-  },[SearchWord]) 
+  const getData = useGetData()
+
+  const OptionsIngredientsMemo = useMemo(() => ConvertToOptionsIngredients(contexto.Ingredients),[contexto.Ingredients])
+  const OptionsGlassMemo = useMemo(() => ConvertToOptionsGlass(contexto.Glass),[contexto.Glass])
+  const OptionsCategoryMemo = useMemo(() => ConvertToOptionsCategory(contexto.Category),[contexto.Category])
+  const OptionsAlcoholicMemo = useMemo(() => ConvertToOptionsAlcoholic(contexto.Alcoholic),[contexto.Alcoholic])
+  const Alfabeto = useMemo(() => GerarAlfabeto(),[])  
 
   useEffect(() => {
-    setDrinksShow(contexto.FirstLetter);
-  }, [contexto]);
+    DrinkShowMemo.setDrinksShow(contexto.FirstLetter);
+  }, [contexto]);  
 
-
-
-  const dadoMemo = useMemo(() => {
-    return DrinksShow.filter((i) =>
-      Filters.strGlass === undefined || Filters.strGlass === null
+  const dadoDrinksMemo = useMemo(() => { 
+    return ConvertToDrinks(
+      DrinkShowMemo.DrinksShow.filter((i) =>
+      FiltersMemo.Filters.strGlass === undefined || FiltersMemo.Filters.strGlass === null
         ? i === i
-        : i.strGlass === Filters.strGlass
+        : i.strGlass === FiltersMemo.Filters.strGlass
     )
       .filter((i) =>
-        Filters.strCategory === undefined || Filters.strCategory === null
+      FiltersMemo.Filters.strCategory === undefined || FiltersMemo.Filters.strCategory === null
           ? i === i
-          : i.strCategory === Filters.strCategory
+          : i.strCategory === FiltersMemo.Filters.strCategory
       )
       .filter((i) =>
-        Filters.strAlcoholic === undefined || Filters.strAlcoholic === null
+      FiltersMemo.Filters.strAlcoholic === undefined || FiltersMemo.Filters.strAlcoholic === null
           ? i === i
-          : i.strAlcoholic === Filters.strAlcoholic
+          : i.strAlcoholic === FiltersMemo.Filters.strAlcoholic
       )
       .filter((i) =>
-        Filters.strIngredients === undefined ||
-        Filters.strIngredients === null ||
-        Object.values(i).includes(Filters.strIngredients)
+      FiltersMemo.Filters.strIngredients === undefined ||
+      FiltersMemo.Filters.strIngredients === null ||
+        Object.values(i).includes(FiltersMemo.Filters.strIngredients)
           ? i === i
           : null
-      );
-  }, [DrinksShow, Filters]);
-
-
-
+      ));
+  }, [DrinkShowMemo.DrinksShow, FiltersMemo.Filters]);    
+  
   return (
     <>
       <HorizontalAlign>
         <TextField
           size="small"
-          onChange={(x) => getDatabySearch(x.target.value)}
+          onChange={async (x) => DrinkShowMemo.setDrinksShow(await getData.Data("/api/json/v1/1/search.php?s=",x.target.value,[...contexto.FirstLetter]))}
           sx={syleInput}
           label="Pesquise"
         />
@@ -106,11 +92,11 @@ const PaginaInicial = () => {
           size="small"
           disablePortal
           onChange={(x, a) => {
-            setFilters((e: CardDrinkOptions) => {
+            FiltersMemo.setFilters((e: CardDrinkOptions) => {
               return { ...e, strIngredients: a?.text as string | null };
             });
           }}
-          options={ConvertToOptionsIngredients(contexto.Ingredients)}
+          options={OptionsIngredientsMemo}
           sx={syleInput}
           renderInput={(params) => (
             <TextField {...params} label="Ingrediente" />
@@ -120,11 +106,11 @@ const PaginaInicial = () => {
           size="small"
           disablePortal
           onChange={(x, a) => {
-            setFilters((e: CardDrinkOptions) => {
+            FiltersMemo.setFilters((e: CardDrinkOptions) => {
               return { ...e, strGlass: a?.text as string | null };
             });
           }}
-          options={ConvertToOptionsGlass(contexto.Glass)}
+          options={OptionsGlassMemo}
           sx={syleInput}
           renderInput={(params) => (
             <TextField {...params} label="Tipo de Copo" />
@@ -134,11 +120,11 @@ const PaginaInicial = () => {
           size="small"
           disablePortal
           onChange={(x, a) => {
-            setFilters((e: CardDrinkOptions) => {
+            FiltersMemo.setFilters((e: CardDrinkOptions) => {
               return { ...e, strCategory: a?.text as string | null };
             });
           }}
-          options={ConvertToOptionsCategory(contexto.Category)}
+          options={OptionsCategoryMemo}
           sx={syleInput}
           renderInput={(params) => <TextField {...params} label="Categoria" />}
         />
@@ -146,11 +132,11 @@ const PaginaInicial = () => {
           size="small"
           disablePortal
           onChange={(x, a) => {
-            setFilters((e: CardDrinkOptions) => {
+            FiltersMemo.setFilters((e: CardDrinkOptions) => {
               return { ...e, strAlcoholic: a?.text as string | null };
             });
           }}
-          options={ConvertToOptionsAlcoholic(contexto.Alcoholic)}
+          options={OptionsAlcoholicMemo}
           sx={syleInput}
           renderInput={(params) => (
             <TextField {...params} label="Categoria de Alcool" />
@@ -158,14 +144,11 @@ const PaginaInicial = () => {
         />
       </HorizontalAlign>
       <GridCardContainer>
-        <CardDrink value={ConvertToDrinks(dadoMemo)} />
+        <CardDrink value={dadoDrinksMemo} />
       </GridCardContainer>
       <SelectLetter
-        data={GerarAlfabeto()}
-        value={LetraSelecionada}
-        onClick={(e) => {
-          getDatabyLetterSelected(e);
-        }}
+        data={Alfabeto}        
+        onClick={async (e) => DrinkShowMemo.setDrinksShow(await getData.Data("/api/json/v1/1/search.php?f=",e,[...contexto.FirstLetter]))}
       />
     </>
   );

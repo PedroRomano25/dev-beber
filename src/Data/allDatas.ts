@@ -1,4 +1,4 @@
-import { ApiDrinks } from "../Types/allTypes";
+import { ApiDrinks, CardDrinkOptions, MenuOptions } from "../Types/allTypes";
 
 export const ApiDrinksDefault: ApiDrinks = {
   Alcoholic: [{ strAlcoholic: "Carregando" }],
@@ -113,18 +113,18 @@ export const ApiDrinksDefault: ApiDrinks = {
   ],
 };
 
-export const CardDrinkOptionsDefault = [
+export const CardDrinkOptionsDefault:CardDrinkOptions[] = [
   {
     strDrink: "Carregando",
     strDrinkThumb:
       "https://prints.ultracoloringpages.com/68fc26d3121e290a7403a60f776e229c.png",
-    strCategory: "Carregando",
-    strAlcoholic: "Carregando",
-    strGlass: "Carregando",
+    strCategory: "",
+    strAlcoholic: "",
+    strGlass: "",
   },
 ];
 
-export const CardDrinkOptionsSemResultado = [
+export const CardDrinkOptionsSemResultado:CardDrinkOptions[] = [
   {
     strDrink: "Nenhum Resultado Encontrado",
     strDrinkThumb:
@@ -135,7 +135,7 @@ export const CardDrinkOptionsSemResultado = [
   },
 ];
 
-export const CardDrinkOptionsFilter = {
+export const CardDrinkOptionsFilter:CardDrinkOptions = {
   strDrink: null,
   strDrinkThumb: null,
   strCategory: null,
@@ -147,7 +147,7 @@ export const styleCard = {minWidth: "190px", maxWidth: "450px", height: "350px"}
 
 export const syleInput = { width: "1fr", backgroundColor: "var(--nav-bg)" }
 
-export const dataMenu = [
+export const dataMenu:MenuOptions[] = [
   {
     nome: "Home",
     link: "/",

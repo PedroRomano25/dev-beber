@@ -61,8 +61,7 @@ export type selectedValue = {
 };
 
 export type MenuSelectLetter = {
-  data: string[];
-  value: string;
+  data: string[];  
   onClick: (value: string) => void;
 };
 

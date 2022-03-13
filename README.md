@@ -4,9 +4,9 @@ https://dev-beber.vercel.app/
 
 Dev-Beber é uma aplicação front-end contruída com React JS.
 
-A Aplicação consiste em uma pesquisa de bebidas com diversos filtros, utilizando a base de dados  [The Cocktail DB](https://www.thecocktaildb.com/api.php).
+A Aplicação consiste em uma pesquisa de bebidas com diversos filtros(Com base nos dados do Endpoint), utilizando a base de dados  [The Cocktail DB](https://www.thecocktaildb.com/api.php).
 
-Projeto criado para treinar habilidades como contexto, uso de hooks, consumo de API, responsividade, filtros, e demais no React JS.
+Projeto criado para treinar habilidades como contexto, uso de hooks, consumo de API, responsividade, filtros, e demais funcionalidades no React JS.
 
 ## Tecnologias Utilizadas
 
