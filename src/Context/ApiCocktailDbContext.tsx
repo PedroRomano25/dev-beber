@@ -1,20 +1,26 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { ApiDrinksDefault } from "../Data/allDatas";
 import { axiosAppServer } from "../Service/axiosAppServer";
+import { useGetData } from "../Service/getData";
 import { ApiDrinks } from "../Types/allTypes";
 
 
 const Context = createContext<ApiDrinks>(ApiDrinksDefault)
 
 export const ApiCocktailProvider = (props: any) => {
-    
+       
     const [Data, setData] = useState<ApiDrinks>(ApiDrinksDefault)
+
+    const DataMemo = useMemo(() => ({
+        Data, setData
+      }), [Data]);
+  
 
     const getDataIngredient = async () => {
         let dados = await axiosAppServer.get('/api/json/v1/1/list.php?i=list')
             .then((i: any) => {
-                setData((e: ApiDrinks) => {
+                DataMemo.setData((e: ApiDrinks) => {
                     return { ...e, Ingredients: i.data.drinks }
                 });
             })
@@ -25,7 +31,7 @@ export const ApiCocktailProvider = (props: any) => {
     const getDataAlcoholic = async () => {
         let dados = await axiosAppServer.get('/api/json/v1/1/list.php?a=list')
             .then((i: any) => {
-                setData((e: ApiDrinks) => {
+                DataMemo.setData((e: ApiDrinks) => {
                     return { ...e, Alcoholic: i.data.drinks }
                 });
             })
@@ -36,7 +42,7 @@ export const ApiCocktailProvider = (props: any) => {
     const getDataGlass = async () => {
         let dados = await axiosAppServer.get('/api/json/v1/1/list.php?g=list')
             .then((i: any) => {
-                setData((e: ApiDrinks) => {
+                DataMemo.setData((e: ApiDrinks) => {
                     return { ...e, Glass: i.data.drinks }
                 });
             })
@@ -47,7 +53,7 @@ export const ApiCocktailProvider = (props: any) => {
     const getDatastrCategory = async () => {
         let dados = await axiosAppServer.get('/api/json/v1/1/list.php?c=list')
             .then((i: any) => {
-                setData((e: ApiDrinks) => {
+                DataMemo.setData((e: ApiDrinks) => {
                     return { ...e, Category: i.data.drinks }
                 });
             })
@@ -58,7 +64,7 @@ export const ApiCocktailProvider = (props: any) => {
     const getDatastrRandom = async () => {
         let dados = await axiosAppServer.get('/api/json/v1/1/random.php')
             .then((i: any) => {
-                setData((e: ApiDrinks) => {
+                DataMemo.setData((e: ApiDrinks) => {
                     return { ...e, Random: i.data.drinks }
                 });
             })
@@ -69,9 +75,7 @@ export const ApiCocktailProvider = (props: any) => {
     const getDatastrByLetter = async () => {
         let dados = await axiosAppServer.get('/api/json/v1/1/search.php?f=a')
             .then((i: any) => {
-                setData((e: ApiDrinks) => {
-                    return { ...e, FirstLetter: i.data.drinks }
-                });
+                DataMemo.setData((e: ApiDrinks) => {return { ...e, FirstLetter: i.data.drinks }});
             })
             .catch((i) => console.log("Lista Random - Falha ao coletar dados"))
         return dados
@@ -89,7 +93,7 @@ export const ApiCocktailProvider = (props: any) => {
     }, [])
 
 
-    return <Context.Provider value={Data}>{props.children}</Context.Provider>
+    return <Context.Provider value={DataMemo.Data}>{props.children}</Context.Provider>
 }
 
 export const useApiCocktailContext = () => {
